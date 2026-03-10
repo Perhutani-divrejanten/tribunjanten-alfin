@@ -5,7 +5,17 @@ const ARTICLE_DIR = path.resolve(__dirname, '../article');
 
 // Function to remove views and comments section from article HTML
 function removeViewsAndComments(htmlContent) {
-  // Remove the views and comments counts display (icon + number)
+  // Remove inline views and comments spans (format 1: inside d-flex mb-3)
+  htmlContent = htmlContent.replace(
+    /<span class="ml-3"><i class="far fa-eye mr-2"><\/i>[^<]*<\/span>/g,
+    ''
+  );
+  htmlContent = htmlContent.replace(
+    /<span class="ml-3"><i class="far fa-comment mr-2"><\/i>[^<]*<\/span>/g,
+    ''
+  );
+
+  // Remove the views and comments counts display (icon + number - format 2)
   htmlContent = htmlContent.replace(
     /<div class="d-flex align-items-center">\s*<span class="ml-3"><i class="far fa-eye mr-2"><\/i>[^<]*<\/span>\s*<span class="ml-3"><i class="far fa-comment mr-2"><\/i>[^<]*<\/span>\s*<\/div>/g,
     ''
